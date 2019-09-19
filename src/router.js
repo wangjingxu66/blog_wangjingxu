@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './views/Login.vue'
+import List from './views/List.vue'
 
 
 Vue.use(Router)
@@ -11,6 +12,11 @@ export default new Router({
       path: '/',
       name: 'loginlink',
       component: Login
+    },
+    {
+      path: '/list',
+      name: 'listlink',
+      component: List
     },
     
   ]
