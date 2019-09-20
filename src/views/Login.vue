@@ -12,9 +12,9 @@ import LoginFooter from '@/components/login_page/LoginFooter.vue'
 
 export default {
   name: 'loginlink',
-  data() {
+  data () {
     return{
-      footerDesc:"所有方:王璟旭"
+      footerDesc:"所有方：王璟旭"
     }
   },
   components: {

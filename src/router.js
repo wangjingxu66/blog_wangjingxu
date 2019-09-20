@@ -6,7 +6,7 @@ import List from './views/List.vue'
 
 Vue.use(Router)
 
-export default new Router({
+const router= new Router({
   routes: [
     {
       path: '/',
@@ -20,4 +20,10 @@ export default new Router({
     },
     
   ]
+} )//as import('vue-router').RouterOptions
+router.beforeEach((to,from,next) => {
+  console.log(from.path)
+  console.log(to.path)
+  next()
 })
+export default router

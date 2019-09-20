@@ -1,9 +1,9 @@
 <template>
-  <div class="login-footer">
-      <el-footer>
-        <p>{{desc}}</p>
-        <p>王璟旭的个人网页,如涉及侵权,请联系本人下架</p>
-      </el-footer>
+  <div id="LoginFooter">
+    <el-footer>
+      <p>{{desc}}</p>
+      <p>王璟旭的个人网页,如涉及侵权,请联系本人下架</p>
+    </el-footer>
   </div>
 </template>
 
@@ -11,48 +11,41 @@
 export default {
   name: "LoginFooter",
   props: {
-      desc:{
-          require:true,
-          type:String,
-      }
-  },
-  data() {
-    return {
-      input: "",
-      input1: ""
-    };
+    desc: {
+      require: true,
+      type: String
+    }
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  body,p{
-    margin: 0;
-  }
-  p{
-    padding: 0;
-  }
-.login-footer{
+<style lang="scss" scoped>
+#LoginFooter {
   position: fixed;
-  left: 3%;
-  bottom: 10%;
-  width:94%;
-}
+  height: 86px;
+  bottom: 5px;
+  width: 100%;
 
-.el-footer {
-  background-color: #f5f5f5;
-  color: #333;
-  text-align: center;
-  line-height: 30px;
-}
-.el-footer p:first-child{
-  font-size: 12px;
-  color: #868686;
-  font-weight: bold;
-}
-.el-footer p:last-child{
-    font-size: 8px;
+  .el-footer {
+    height: 118px !important;
+    background-color: #f5f5f5;
+    color: #333;
+    text-align: center;
+  }
+
+  .el-footer p:first-child {
+    padding: 40px 0 10px;
+    line-height: 14px;
+    font-size: 14px;
+    color: #868686;
+    font-weight: bold;
+  }
+
+  .el-footer p:last-child {
+    line-height: 12px;
+    font-size: 12px;
     color: #ababab;
+  }
 }
 </style>

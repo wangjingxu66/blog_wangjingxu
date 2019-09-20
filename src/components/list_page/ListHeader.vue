@@ -1,7 +1,9 @@
 <template>
-  <div class="list-header">
+  <div id="ListHeader">
     <el-container>
-      <el-header>Header</el-header>
+      <el-header>
+        <img src="@/assets/blog_logo_2.png">
+      </el-header>
     </el-container>
   </div>
 </template>
@@ -14,11 +16,16 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss" scoped>
  .el-header {
-    background-color: #B3C0D1;
+    height: 66px !important;
+    background-color: #3e89da;
     color: #333;
-    text-align: center;
-    line-height: 60px;
+    line-height: 66px;
+  }
+  img{
+    width: 120px;
+    margin-top: 30px;
+    margin-left:50px;
   }
 </style>
