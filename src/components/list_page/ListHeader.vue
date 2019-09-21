@@ -26,6 +26,6 @@ export default {
   img{
     width: 120px;
     margin-top: 30px;
-    margin-left:50px;
+    margin-left:70px;
   }
 </style>
