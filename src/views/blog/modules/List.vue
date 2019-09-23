@@ -1,7 +1,7 @@
 <template>
-  <div class="login">
+  <div class="List">
     <ListHeader/>
-    <ListAside/>
+    <ListAside :posts="posts"/>
     <ListMain/>
   </div>
 </template>
@@ -13,7 +13,7 @@ import ListAside from '@/components/list_page/ListAside.vue'
 import ListMain from '@/components/list_page/ListMain.vue'
 
 export default {
-  name: 'listlink',
+  name: 'List',
   components: {
     ListHeader,
     ListAside,

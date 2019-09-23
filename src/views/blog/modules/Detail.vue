@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="Detail">
     <ListHeader/>
     <ListAside/>
     <DetailMain/>
@@ -13,7 +13,7 @@ import ListAside from '@/components/list_page/ListAside.vue'
 import DetailMain from '@/components/detail_page/DetailMain.vue'
 
 export default {
-  name: 'listlink',
+  name: 'Detail',
   components: {
     ListHeader,
     ListAside,

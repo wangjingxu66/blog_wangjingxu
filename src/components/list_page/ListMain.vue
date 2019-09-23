@@ -12,13 +12,13 @@
             </template>
           </el-table-column>
           <el-table-column label="标题" width="240">
-            <template slot-scope="scope">             
-                 <span>{{ scope.row.title }}</span>
+            <template slot-scope="scope">
+              <span>{{ scope.row.title }}</span>
             </template>
           </el-table-column>
-           <el-table-column label="备注" width="240">
-            <template slot-scope="scope">             
-                 <span>{{ scope.row.remark }}</span>
+          <el-table-column label="备注" width="240">
+            <template slot-scope="scope">
+              <span>{{ scope.row.remark }}</span>
             </template>
           </el-table-column>
           <el-table-column label="操作">
@@ -40,11 +40,7 @@
             </template>
           </el-table-column>
         </el-table>
-        <el-pagination
-  background
-  layout="prev, pager, next"
-  :total="1000">
-</el-pagination>
+        <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
       </el-main>
     </el-container>
   </div>
@@ -52,31 +48,31 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       tableData: [
         {
           date: '2019-09-01',
           title: 'Webpack与Gulp的区别',
-          remark:'重要'
+          remark: '重要'
         },
         {
           date: '2019-09-02',
-          title: "git命令",
-          remark:'重要'
+          title: 'git命令',
+          remark: '重要'
         }
       ]
-    };
+    }
   },
   methods: {
-    handleEdit(index, row) {
-      console.log(index, row);
+    handleEdit (index, row) {
+      console.log(index, row)
     },
-    handleDelete(index, row) {
-      console.log(index, row);
+    handleDelete (index, row) {
+      console.log(index, row)
     }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -97,8 +93,8 @@ body {
   margin: 10px 0 20px 20px;
   font-size: 20px;
 }
-.el-pagination{
+.el-pagination {
   float: right;
-  margin-top:20px;
+  margin-top: 20px;
 }
 </style>
