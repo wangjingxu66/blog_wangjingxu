@@ -3,41 +3,80 @@
     <el-container>
       <el-aside>
         <img src="@/assets/blog_logo_3.png" />
-        <div class="asideTitle">
+        <!-- <div class="asideTitle">
           <i class="el-icon-document"></i>
           <h3>文章列表</h3>
         </div>
         <div class="posts-aside">
           <ul class="posts-title">
             <li
-              v-for="post in posts"
-              :key="post.id"
-              :class="{selected: post === selectedPost}"
-              v-on:click="selectedPost = post"
-            >{{post.title}}</li>
+              v-for="(item, index) in navList"
+              :key="index"
+              :class="{selected: item.route.name === curRouteName}"
+              @click="selectedPost = post"
+            >
+              <div v-if="!item.children">{{ item.title }}</div>
+              <ul></ul>
+            </li>
           </ul>
-        </div>
+        </div>-->
+
+        <NavUnit :navList="navList"></NavUnit>
       </el-aside>
     </el-container>
   </div>
 </template>
 
 <script>
+import NavUnit from './NavUnit'
 export default {
   name: 'ListAside',
+
+  components: {
+    NavUnit
+  },
+
   data () {
     return {
-      posts: [
-        {
-          id: 1,
-          title: '前端笔记'
-        },
-        {
-          id: 2,
-          title: '服务端笔记'
+      routes: this.$router.options.routes,
+      navList: [],
+      curRouteName: this.$route.name,
+    }
+  },
+
+  created () {
+    this.generateNavList(this.routes, this.navList)
+    console.log(this.navList);
+    console.log(this.$route)
+  },
+
+  methods: {
+    generateNavList (routes, targetArr) {
+      routes.forEach((route, index) => {
+        const nav = route.meta.nav;
+        // 如果不存在在侧边栏定义，则跳过
+        if (!nav) {
+          return;
         }
-      ],
-      selectedPost: null
+        if (nav.length) {
+          nav.forEach((navItem, navItemIndex) => {
+            if (route.children && route.children.length) {
+              const children = [];
+              this.generateNavList(route.children, children)
+              targetArr.push({
+                nav: navItem,
+                route,
+                children
+              })
+            } else {
+              targetArr.push({
+                nav: navItem,
+                route
+              })
+            }
+          })
+        }
+      })
     }
   }
 }
