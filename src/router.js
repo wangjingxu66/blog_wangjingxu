@@ -25,7 +25,7 @@ const router = new Router({
       meta: {
         title: '列表入口',
         nav: [
-          { name: '文章列表', level: 0 }
+          { name: '文章列表', level: 0, _path: '/blog/list', }
         ]
       },
       children: [
@@ -36,8 +36,8 @@ const router = new Router({
           meta: {
             title: '博客列表',
             nav: [
-              { name: '前端博客', type: 'frontend_blog', level: 1 },
-              { name: '服务端博客', type: 'server_blog', level: 1 },
+              { name: '前端博客', type: 'frontend_blog', level: 1, _path: '/blog/list', },
+              { name: '服务端博客', type: 'server_blog', level: 1, _path: '/blog/list', },
             ]
           }
         },
