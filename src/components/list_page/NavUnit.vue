@@ -106,7 +106,7 @@ export default {
   // padding-bottom: 10px-$level * 2;
   // padding-right: 20px;
   .active {
-    color: red;
+    color: skyblue;
   }
   @if ($level == 0) {
     color: #333;
