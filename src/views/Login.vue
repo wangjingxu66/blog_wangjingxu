@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <LoginContent msg="Welcome to Your Vue.js App"/>
-    <LoginFooter :desc="footerDesc"/>
+    <LoginFooter :desc="footerDescABC"/>
   </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
   name: 'loginlink',
   data () {
     return{
-      footerDesc:"所有方：王璟旭"
+      footerDescABC:"所有方：王璟旭"
     }
   },
   components: {
