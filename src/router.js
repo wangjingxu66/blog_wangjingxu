@@ -12,23 +12,42 @@ const router = new Router({
     {
       path: '/',
       name: 'Login',
-      component: Login
+      component: Login,
+      meta: {
+        title: '登录页',
+      }
     },
     {
       path: '/blog',
       name: 'Blog',
       component: Blog,
       redirect: '/blog/list',
+      meta: {
+        title: '列表入口',
+        nav: [
+          { name: '文章列表', level: 0 }
+        ]
+      },
       children: [
         {
           path: 'list',
           name: 'BlogList',
-          component: BlogList
+          component: BlogList,
+          meta: {
+            title: '博客列表',
+            nav: [
+              { name: '前端博客', type: 'frontend_blog', level: 1 },
+              { name: '服务端博客', type: 'server_blog', level: 1 },
+            ]
+          }
         },
         {
           path: 'detail',
           name: 'BlogDetail',
-          component: BlogDetail
+          component: BlogDetail,
+          meta: {
+            title: '详情',
+          }
         }
       ]
     }
