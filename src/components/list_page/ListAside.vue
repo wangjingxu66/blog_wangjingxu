@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import NavUnit from './NavUnit'
+import NavUnit from './asidemodules/NavUnit'
 export default {
   name: 'ListAside',
 
@@ -39,8 +39,7 @@ export default {
   data () {
     return {
       routes: this.$router.options.routes,
-      navList: [],
-      curRouteName: this.$route.name,
+      navList: []
     }
   },
 

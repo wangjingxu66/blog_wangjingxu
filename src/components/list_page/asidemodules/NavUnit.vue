@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import NavUnit from './NavUnit'
+import NavUnit from "./NavUnit";
 export default {
-  name: 'NavUnit',
+  name: "NavUnit",
 
   components: {
     NavUnit
@@ -32,7 +32,7 @@ export default {
   props: {
     navList: {
       type: Array,
-      required: true,
+      required: true
     }
   },
 
@@ -55,68 +55,73 @@ export default {
   // },
 
   methods: {
-    handleClickNavItem (item) {
+    handleClickNavItem(item) {
       if (item.nav.type) {
         this.$router.push({
           path: item.route.path,
           query: { type: item.nav.type }
-        })
+        });
       } else {
-        this.$router.push(item.route.path)
+        this.$router.push(item.route.path);
       }
     },
 
-    generateLevelClass (level) {
-      return `nav_level_${level}`
+    generateLevelClass(level) {
+      return `nav_level_${level}`;
     },
 
-    generateActiveClass (item) {
+    generateActiveClass(item) {
       // 有query下的type的情况
       if (item.nav.type) {
         if (
           this.$route.path === item.nav._path &&
           this.$route.query.type === item.nav.type
         ) {
-          return 'active'
+          return "active";
         } else {
-          return ''
+          return "";
         }
       }
       // 不包含query下的type的情况
       else {
         if (this.$route.path === item.nav._path) {
-          return 'active'
+          return "active";
         } else {
-          return ''
+          return "";
         }
       }
-    },
+    }
 
     // onRouterChange (to, from) {
     //   debugger;
     // }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
 @mixin nav_li_style($level) {
-  padding-left: $level * 50px;
-  padding-top: 20px - $level * 2;
-  padding-bottom: 20px - $level * 2;
-  padding-right: 20px;
-
+  //  padding-left: $level * 50px;
+  //  padding-top: 20px-$level * 2;
+  // padding-bottom: 10px-$level * 2;
+  // padding-right: 20px;
+  .active {
+    color: skyblue;
+  }
   @if ($level == 0) {
     color: #333;
+    font-size: 20px;
     font-weight: bold;
+    margin-top: 75px;
   } @else if ($level == 1) {
     color: #666;
+    font-size: 16px;
     font-weight: normal;
   }
 
   & > div > a {
     display: inline-block;
-    margin-bottom: 20px;
+    margin-bottom: 26px;
   }
 }
 
@@ -131,8 +136,5 @@ export default {
 }
 .nav_level_3 {
   @include nav_li_style(3);
-}
-.nav_level_4 {
-  @include nav_li_style(4);
 }
 </style>
