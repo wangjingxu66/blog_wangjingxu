@@ -7,8 +7,8 @@
 
 <script>
 // @ is an alias to /src
-import LoginContent from '@/components/login_page/LoginContent.vue'
-import LoginFooter from '@/components/login_page/LoginFooter.vue'
+import LoginContent from '@/components/login/LoginContent.vue'
+import LoginFooter from '@/components/login/LoginFooter.vue'
 
 export default {
   name: 'loginlink',

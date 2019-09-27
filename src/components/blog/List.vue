@@ -2,8 +2,15 @@
   <div id="ListMain">
     <el-container>
       <el-main>
-        <h3>前端笔记</h3>
-        <el-table :data="tableData" style="width: 100%">
+        <h3>{{ listName }}</h3>
+        <el-table
+          :data="tableData"
+          style="width: 100%"
+          @row-click="handleClickTableRow"
+          :style="{
+            'cursor': 'pointer'
+          }"
+        >
           <el-table-column type="index" width="50"></el-table-column>
           <el-table-column label="日期" width="180">
             <template slot-scope="scope">
@@ -50,21 +57,77 @@
 export default {
   data () {
     return {
-      tableData: [
-        {
-          date: '2019-09-01',
-          title: 'Webpack与Gulp的区别',
-          remark: '重要'
-        },
-        {
-          date: '2019-09-02',
-          title: 'git命令',
-          remark: '重要'
-        }
-      ]
+      testTableData: {
+        'frontend_blog': [
+          {
+            date: '2019-09-01',
+            title: 'Webpack与Gulp的区别',
+            remark: '重要',
+            id: 1
+          },
+          {
+            date: '2019-09-02',
+            title: 'git命令',
+            remark: '重要',
+            id: 2
+          }
+        ],
+
+        'server_blog': [
+          {
+            date: '2018-07-01',
+            title: '服务端搭建Nginx',
+            remark: '很重要',
+            id: 3
+          },
+          {
+            date: '2018-04-02',
+            title: '服务端学习',
+            remark: '重要',
+            id: 4
+          }
+        ],
+      },
+      tableData: [],
+      // 当前列表名称
+      listName: '',
+      type: '',
     }
   },
+
+  watch: {
+    $route: 'onRouterChange'
+  },
+
+  created () {
+    this.onRouterChange();
+  },
+
   methods: {
+    onRouterChange (to, from) {
+      this.init()
+    },
+
+    init () {
+      this.type = this.$route.query.type
+      this.$route.meta.nav.forEach((item, index) => {
+        if (item.type === this.type) {
+          this.listName = item.name
+          this.tableData = Object.assign([], this.testTableData[this.type])
+        }
+      })
+    },
+
+    handleClickTableRow (row, column, event) {
+      this.$router.push({
+        path: '/blog/detail',
+        query: {
+          type: this.type,
+          id: row.id,
+        }
+      })
+    },
+
     handleEdit (index, row) {
       console.log(index, row)
     },
@@ -83,12 +146,12 @@ export default {
             message: '删除成功!'
           })
         })
-          .catch(() => {
-            this.$message({
+        .catch(() => {
+          this.$message({
             type: 'info',
             message: '已取消删除'
           })
-          })
+        })
     }
   }
 }

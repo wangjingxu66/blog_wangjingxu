@@ -28,7 +28,8 @@
 </template>
 
 <script>
-import NavUnit from './asidemodules/NavUnit'
+import NavUnit from '@/components/blog/nav/NavUnit'
+
 export default {
   name: 'ListAside',
 

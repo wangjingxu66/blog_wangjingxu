@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from './views/Login'
-import Blog from './views/blog'
-import BlogList from './views/blog/modules/List'
-import BlogDetail from './views/blog/modules/Detail'
+import Login from '@/views/Login'
+import Blog from '@/views/Blog'
+import BlogList from '@/components/blog/List'
+import BlogDetail from '@/components/blog/Detail'
 
 Vue.use(Router)
 
@@ -21,8 +21,8 @@ const router = new Router({
       path: '/blog',
       name: 'Blog',
       component: Blog,
-      redirect: '/blog/list',
-      meta: {                                                
+      redirect: '/blog/list?type=frontend_blog',
+      meta: {
         title: '列表入口',
         nav: [
           { name: '文章列表', level: 0, _path: '/blog/list', }
@@ -42,30 +42,22 @@ const router = new Router({
           }
         },
         {
-          path: 'list',
+          path: 'detail',
           name: 'BlogDetail',
           component: BlogDetail,
-          query: {type: 'frontend_blog'},
           meta: {
-            title: '前端博客内容详情',
+            title: '博客详情',
           }
         },
-        {
-          path: 'list',
-          name: 'BlogDetail',
-          component: BlogDetail,
-          query: 'server_blog',
-          meta: {
-            title: '服务端博客内容详情',
-          }
-        }
       ]
     }
   ]
 })//as import('vue-router').RouterOptions
+
 router.beforeEach((to, from, next) => {
   console.log(from.path)
   console.log(to.path)
   next()
 })
+
 export default router
