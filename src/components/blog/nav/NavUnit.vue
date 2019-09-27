@@ -36,24 +36,6 @@ export default {
     }
   },
 
-  // data() {
-  //   return {
-  //     example: '132'
-  //   }
-  // },
-
-  // created () {
-  //   this.onRouterChange(this.$route, null)
-  // },
-
-  // watch: {
-  //   $route: 'onRouterChange',
-  //   example: (val) => {
-  //     console.log(val);
-  //   }
-  // }
-  // },
-
   methods: {
     handleClickNavItem(item) {
       if (item.nav.type) {
@@ -91,10 +73,6 @@ export default {
         }
       }
     }
-
-    // onRouterChange (to, from) {
-    //   debugger;
-    // }
   }
 };
 </script>
@@ -105,6 +83,8 @@ export default {
   //  padding-top: 20px-$level * 2;
   // padding-bottom: 10px-$level * 2;
   // padding-right: 20px;
+  cursor: pointer;
+
   .active {
     color: skyblue;
   }
