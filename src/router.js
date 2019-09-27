@@ -22,7 +22,7 @@ const router = new Router({
       name: 'Blog',
       component: Blog,
       redirect: '/blog/list',
-      meta: {
+      meta: {                                                
         title: '列表入口',
         nav: [
           { name: '文章列表', level: 0, _path: '/blog/list', }
@@ -42,11 +42,21 @@ const router = new Router({
           }
         },
         {
-          path: 'detail',
+          path: 'list',
           name: 'BlogDetail',
           component: BlogDetail,
+          query: {type: 'frontend_blog'},
           meta: {
-            title: '详情',
+            title: '前端博客内容详情',
+          }
+        },
+        {
+          path: 'list',
+          name: 'BlogDetail',
+          component: BlogDetail,
+          query: 'server_blog',
+          meta: {
+            title: '服务端博客内容详情',
           }
         }
       ]
