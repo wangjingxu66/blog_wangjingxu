@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <LoginContent msg="Welcome to Your Vue.js App"/>
+    <LoginContent/>
     <LoginFooter :desc="footerDescContent"/>
   </div>
 </template>

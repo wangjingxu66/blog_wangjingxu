@@ -6,7 +6,7 @@
         <el-table
           :data="tableData"
           style="width: 100%"
-          @row-click="handleClickTableRow"
+          @cell-dblclick="handleClickTableRow"
           :style="{
             'cursor': 'pointer'
           }"
@@ -96,11 +96,19 @@ export default {
   },
 
   watch: {
-    $route: 'onRouterChange'
+    $route: 'onRouterChange',
+    // tableData:{
+    //    handler(){ //监控data/computed选项数据的变化
+    //                 console.log('数组变化了 我监控到了')
+    //                 localStorage.setItem('tableData',JSON.stringify(this.tableData))
+    //             },
+    //             deep:true,  //监控数组length的变化
+    // }
   },
-
   created () {
-    this.onRouterChange();
+       this.onRouterChange();
+       //console.log(JSON.parse(localStorage.getItem('tableData')))
+      //this.tableData=JSON.parse(localStorage.getItem('tableData'))||[]    
   },
 
   methods: {
@@ -118,12 +126,12 @@ export default {
       })
     },
 
-    handleClickTableRow (row, column, event) {
+    handleClickTableRow (row, column, cell, event) {
       this.$router.push({
         path: '/blog/detail',
         query: {
           type: this.type,
-          id: row.id,
+          id: row.id
         }
       })
     },
@@ -132,8 +140,6 @@ export default {
       console.log(index, row)
     },
     handleDelete (index, row) {
-      console.log(index)
-
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
