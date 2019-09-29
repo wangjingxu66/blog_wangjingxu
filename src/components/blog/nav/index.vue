@@ -3,24 +3,6 @@
     <el-container>
       <el-aside>
         <img src="@/assets/blog_logo_3.png" />
-        <!-- <div class="asideTitle">
-          <i class="el-icon-document"></i>
-          <h3>文章列表</h3>
-        </div>
-        <div class="posts-aside">
-          <ul class="posts-title">
-            <li
-              v-for="(item, index) in navList"
-              :key="index"
-              :class="{selected: item.route.name === curRouteName}"
-              @click="selectedPost = post"
-            >
-              <div v-if="!item.children">{{ item.title }}</div>
-              <ul></ul>
-            </li>
-          </ul>
-        </div>-->
-
         <NavUnit :navList="navList"></NavUnit>
       </el-aside>
     </el-container>

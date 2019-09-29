@@ -14,7 +14,7 @@ export default {
   name: 'Blog',
   components: {
     Header,
-    Nav,
+    Nav
   }
 }
 </script>
