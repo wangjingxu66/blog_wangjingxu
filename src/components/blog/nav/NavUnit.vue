@@ -38,14 +38,16 @@ export default {
 
   methods: {
     handleClickNavItem(item) {
+       console.log(item.route)
       if (item.nav.type) {
         this.$router.push({
           path: item.route.path,
           query: { type: item.nav.type }
         });
-      } else {
-        this.$router.push(item.route.path);
       }
+      //  else {
+      //   this.$router.push(item.route.path);
+      // }
     },
 
     generateLevelClass(level) {
@@ -77,16 +79,18 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 @mixin nav_li_style($level) {
   //  padding-left: $level * 50px;
   //  padding-top: 20px-$level * 2;
-  // padding-bottom: 10px-$level * 2;
+  // padding-bottom: 25px-$level * 9;
   // padding-right: 20px;
   cursor: pointer;
-
+  #NavUnit{
+    padding-inline-start: 0 !important;
+  }
   .active {
-    color: skyblue;
+    color: #5b93e2;
   }
   @if ($level == 0) {
     color: #333;
@@ -101,7 +105,9 @@ export default {
 
   & > div > a {
     display: inline-block;
-    margin-bottom: 26px;
+    padding-bottom: 25px-$level * 9;
+    margin-left: 110px;
+    text-align: left;
   }
 }
 

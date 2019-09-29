@@ -23,7 +23,7 @@ export default {
 <style lang="scss" scoped>
 #LoginFooter {
   position: fixed;
-  height: 86px;
+  height: 118px;
   bottom: 5px;
   width: 100%;
 
@@ -35,9 +35,9 @@ export default {
   }
 
   .el-footer p:first-child {
-    padding: 40px 0 10px;
-    line-height: 14px;
-    font-size: 14px;
+    padding: 36px 0 10px;
+    line-height: 12px;
+    font-size: 12px;
     color: #868686;
     font-weight: bold;
   }

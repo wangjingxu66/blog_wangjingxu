@@ -4,7 +4,7 @@
     <el-input v-model="username" placeholder="账号"></el-input>
     <el-input placeholder="密码" v-model="password" show-password></el-input>
     <el-row>
-      <el-button type="primary" @click="$router.push('/blog/list')">登录</el-button>
+      <el-button type="primary" @click="$router.push('/blog/list?type=frontend_blog')">登录</el-button>
     </el-row>
   </div>
 </template>

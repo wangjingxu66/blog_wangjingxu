@@ -14,18 +14,18 @@ const router = new Router({
       name: 'Login',
       component: Login,
       meta: {
-        title: '登录页',
+        title: '登录页'
       }
     },
     {
       path: '/blog',
       name: 'Blog',
       component: Blog,
-      redirect: '/blog/list?type=frontend_blog',
+      //redirect: '/blog/list',
       meta: {
         title: '列表入口',
         nav: [
-          { name: '文章列表', level: 0, _path: '/blog/list', }
+          { name: '文章列表', level: 0, _path: '/blog/list' }
         ]
       },
       children: [
@@ -36,8 +36,8 @@ const router = new Router({
           meta: {
             title: '博客列表',
             nav: [
-              { name: '前端博客', type: 'frontend_blog', level: 1, _path: '/blog/list', },
-              { name: '服务端博客', type: 'server_blog', level: 1, _path: '/blog/list', },
+              { name: '前端博客', type: 'frontend_blog', level: 1, _path: '/blog/list' },
+              { name: '服务端博客', type: 'server_blog', level: 1, _path: '/blog/list' }
             ]
           }
         },
@@ -46,9 +46,9 @@ const router = new Router({
           name: 'BlogDetail',
           component: BlogDetail,
           meta: {
-            title: '博客详情',
+            title: '博客详情'
           }
-        },
+        }
       ]
     }
   ]
