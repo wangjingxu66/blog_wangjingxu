@@ -119,6 +119,7 @@ export default {
     init () {
       this.type = this.$route.query.type
       this.$route.meta.nav.forEach((item, index) => {
+        console.log(item)
         if (item.type === this.type) {
           this.listName = item.name
           this.tableData = Object.assign([], this.testTableData[this.type])
