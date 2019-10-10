@@ -6,7 +6,7 @@
         <el-table
           :data="tableData"
           style="width: 100%"
-          @cell-dblclick="handleClickTableRow"
+          @row-click="handleClickTableRow"
           :style="{
             'cursor': 'pointer'
           }"
@@ -54,42 +54,12 @@
 </template>
 
 <script>
+import getBlogList from '@/apis/getBlogList'
+
 export default {
   data () {
     return {
-      testTableData: {
-        'frontend_blog': [
-          {
-            date: '2019-09-01',
-            title: 'Webpack与Gulp的区别',
-            remark: '重要',
-            id: 1
-          },
-          {
-            date: '2019-09-02',
-            title: 'git命令',
-            remark: '重要',
-            id: 2
-          }
-        ],
-
-        'server_blog': [
-          {
-            date: '2018-07-01',
-            title: '服务端搭建Nginx',
-            remark: '很重要',
-            id: 3
-          },
-          {
-            date: '2018-04-02',
-            title: '服务端学习',
-            remark: '重要',
-            id: 4
-          }
-        ],
-      },
       tableData: [],
-      // 当前列表名称
       listName: '',
       type: '',
     }
@@ -97,43 +67,41 @@ export default {
 
   watch: {
     $route: 'onRouterChange',
-    // tableData:{
-    //    handler(){ //监控data/computed选项数据的变化
-    //                 console.log('数组变化了 我监控到了')
-    //                 localStorage.setItem('tableData',JSON.stringify(this.tableData))
-    //             },
-    //             deep:true,  //监控数组length的变化
-    // }
   },
   created () {
-       this.onRouterChange();
-       //console.log(JSON.parse(localStorage.getItem('tableData')))
-      //this.tableData=JSON.parse(localStorage.getItem('tableData'))||[]    
+    this.onRouterChange();
   },
 
   methods: {
     onRouterChange (to, from) {
-      this.init()
+      this.init();
     },
 
     init () {
-      this.type = this.$route.query.type
-      this.$route.meta.nav.forEach((item, index) => {
-        console.log(item)
+      this.type = this.$route.query.type;
+      this.$route.meta.nav.forEach(async (item, index) => {
         if (item.type === this.type) {
-          this.listName = item.name
-          this.tableData = Object.assign([], this.testTableData[this.type])
+          this.listName = item.name;
+          let tableData = [];
+          try {
+            tableData = await getBlogList({ type: this.type });
+          } catch (err) {
+          }
+          this.tableData = Object.assign([], tableData);
         }
-      })
+      });
     },
 
-    handleClickTableRow (row, column, cell, event) {
+    handleClickTableRow (row, column, event) {
+      if (event.target.className.indexOf('el-icon') > -1) {
+        return;
+      }
       this.$router.push({
         path: '/blog/detail',
         query: {
           type: this.type,
-          id: row.id
-        }
+          id: row.id,
+        },
       })
     },
 
@@ -144,23 +112,23 @@ export default {
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-        type: 'warning'
+        type: 'warning',
       })
         .then(() => {
           this.tableData.splice(index, 1)
           this.$message({
             type: 'success',
-            message: '删除成功!'
+            message: '删除成功!',
           })
         })
         .catch(() => {
           this.$message({
             type: 'info',
-            message: '已取消删除'
+            message: '已取消删除',
           })
         })
-    }
-  }
+    },
+  },
 }
 </script>
 

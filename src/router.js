@@ -52,7 +52,7 @@ const router = new Router({
       ]
     }
   ]
-})//as import('vue-router').RouterOptions
+})
 
 router.beforeEach((to, from, next) => {
   console.log(from.path)
