@@ -1,0 +1,47 @@
+登录界面 点击登录按钮绑定事件 调用api post接口 截流 前端校验用户名密码 格式 只能输入英文和数字 并且5-12个字符
+点击登录按钮 校验错误3次以上 弹出对话框 禁止登录10秒 
+登录成功则跳转 失败则提示登录失败并记录次数 
+
+新增 post api
+
+request 公共方法不用更改
+
+后端数据校验用户名对错 记录次数 如果3次以上 记录时间 settimeout
+记录登录状态的map{key value}
+
+userStatusTemplate = {
+    failedTimes: 0,
+    locked: false,
+    waitTime: 0,
+    timer: null,
+}
+
+userStatus: {
+    pingyuan: {
+        failedTimes: 0,
+        locked: false,
+        waitTime: 0,
+        timer: null,
+    },
+
+    wangjingxu: {
+        failedTimes: 3,
+        locked: true,
+        waitTime: 10,
+        timer: null,
+    },
+}
+
+userStatus.wangjingxu.timer = setInterval(() => {
+    if (userStatus.wangjingxu.waitTime === 0) {
+        delete userStatus.wangjingxu;
+        clearInterval(userStatus.wangjingxu.timer);
+    } else {
+        userStatus.wangjingxu.timer--;
+    }
+}, 1000);
+
+if (failed) {
+    userStatus[userName] = Object.assign({}, userStatusTemplate);
+    userStatus[userName].failedTimes = 1;
+}

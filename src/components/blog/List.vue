@@ -90,13 +90,13 @@ export default {
       this.type = this.$route.query.type;
       this.$route.meta.nav.forEach(async (item, index) => {
         if (item.type === this.type) {
-          this.listName = item.name;
-          let tableData = [];
           try {
-            tableData = await getBlogList({ type: this.type });
+            this.listName = item.name;
+            const res = await getBlogList({ type: this.type });
+            // const res = await getBlogList({ type: '301' });
+            this.tableData = Object.assign([], res.data);
           } catch (err) {
           }
-          this.tableData = Object.assign([], tableData);
         }
       });
     },
