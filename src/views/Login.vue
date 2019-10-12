@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div id="Login">
     <LoginContent/>
     <LoginFooter :desc="footerDescContent"/>
   </div>
@@ -11,7 +11,7 @@ import LoginContent from '@/components/login/LoginContent.vue'
 import LoginFooter from '@/components/login/LoginFooter.vue'
 
 export default {
-  name: 'loginlink',
+  name: 'Login',
   data () {
     return{
       footerDescContent:"所有方：王璟旭"

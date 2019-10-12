@@ -67,18 +67,9 @@ export default {
 
   watch: {
     $route: 'onRouterChange',
-    // tableData:{
-    //    handler(){ //监控data/computed选项数据的变化
-    //                 console.log('数组变化了 我监控到了')
-    //                 localStorage.setItem('tableData',JSON.stringify(this.tableData))
-    //             },
-    //             deep:true,  //监控数组length的变化
-    // }
   },
   created () {
     this.onRouterChange();
-    // console.log(JSON.parse(localStorage.getItem('tableData')))
-    // this.tableData=JSON.parse(localStorage.getItem('tableData'))||[]
   },
 
   methods: {
@@ -90,17 +81,17 @@ export default {
       this.type = this.$route.query.type;
       this.$route.meta.nav.forEach(async (item, index) => {
         if (item.type === this.type) {
-          try {
-            this.listName = item.name;
-            const res = await getBlogList({ type: this.type });
-            // const res = await getBlogList({ type: '301' });
-            this.tableData = Object.assign([], res.data);
-          } catch (err) {
-          }
+        try{
+          this.listName = item.name;
+          const res = await getBlogList({ type: this.type});
+          //const res = await getBlogList({ type: '301'});
+          this.tableData = Object.assign([],res.data)
+        }catch(err){
+          console.log(err)
         }
-      });
+    }
+      })
     },
-
     handleClickTableRow (row, column, event) {
       if (event.target.className.indexOf('el-icon') > -1) {
         return;
