@@ -1,11 +1,12 @@
 import { post } from '@/utils/Request.js'
 
-export default async ({ type }) => {
+export default async ({ username, password }) => {
   try{
     const res = await post({
-      url: 'LoginMsg',
+      url: 'PostLogin',
       params: {
-        type,
+        username,
+        password,
       }
     });
     return Promise.resolve(res)

@@ -6,22 +6,28 @@
         <el-input type="username" v-model="ruleForm.username" placeholder="账号" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input type="password" placeholder="密码" v-model="ruleForm.password" show-password autocomplete="off"></el-input>
+        <el-input
+          type="password"
+          placeholder="密码"
+          v-model="ruleForm.password"
+          show-password
+          autocomplete="off"
+        ></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+        <el-button :type="btnStatus" @click="submitForm('ruleForm')">登录</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
-import postLoginMsg from '@/apis/postLoginMsg'
+import postLogin from '@/apis/postLogin'
 
 export default {
   name: "LoginContent",
 
-  data() {
+  data () {
     var validateUsername = (rule, value, callback) => {
       let reg = /[0-9a-zA-Z]{5,12}/;
       if (!reg.test(value)) {
@@ -40,6 +46,11 @@ export default {
     };
 
     return {
+      btnStatus: 'primary',
+      btnStatusEnum: {
+        active: 'primary',
+        disabled: 'info',
+      },
       ruleForm: {
         username: "",
         password: ""
@@ -58,19 +69,22 @@ export default {
   },
   methods: {
     submitForm (formName) {
-      var type =this.ruleForm
-      console.log(this.ruleForm)
-      this.$refs[formName].validate( async valid => {
+      if (this.btnStatus === this.btnStatusEnum.disabled) {
+        return;
+      }
+      const { username, password } = this.ruleForm;
+      this.$refs[formName].validate(async (valid) => {
         if (valid) {
-          try{
-            const res = await postLoginMsg(
-              { type }
-            )
-          }catch(err){
-            console.log(err)
+          try {
+            this.btnStatus = this.btnStatusEnum.disabled;
+            const res = await postLogin({ username, password });
+            this.$router.push('/list');
+          } catch (err) {
+            this.$message.error(err && err.msg);
+            console.log(err);
+            this.btnStatus = this.btnStatusEnum.active;
           }
         } else {
-          console.log('error submit!!');
           return false;
         }
       });
@@ -91,7 +105,8 @@ export default {
   width: 255px;
   height: 240px;
 
-  .el-button--primary {
+  .el-button--primary,
+  .el-button--info {
     width: 255px;
   }
 

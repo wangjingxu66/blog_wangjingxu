@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/views/Login'
 import Blog from '@/views/Blog'
-import BlogList from '@/components/blog/List'
+import GetBlogList from '@/components/blog/List'
 import BlogDetail from '@/components/blog/Detail'
 
 Vue.use(Router)
@@ -31,8 +31,8 @@ const router = new Router({
       children: [
         {
           path: 'list',
-          name: 'BlogList',
-          component: BlogList,
+          name: 'GetBlogList',
+          component: GetBlogList,
           meta: {
             title: '博客列表',
             nav: [

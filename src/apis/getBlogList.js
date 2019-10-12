@@ -3,7 +3,7 @@ import { get } from '@/utils/Request.js'
 export default async ({ type }) => {
   try {
     const res = await get({
-      url: 'BlogList',
+      url: 'GetBlogList',
       params: {
         type,
       },
