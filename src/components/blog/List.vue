@@ -81,17 +81,17 @@ export default {
       this.type = this.$route.query.type;
       this.$route.meta.nav.forEach(async (item, index) => {
         if (item.type === this.type) {
+        try{
           this.listName = item.name;
-          let tableData = [];
-          try {
-            tableData = await getBlogList({ type: this.type });
-          } catch (err) {
-          }
-          this.tableData = Object.assign([], tableData);
+          const res = await getBlogList({ type: this.type});
+          //const res = await getBlogList({ type: '301'});
+          this.tableData = Object.assign([],res.data)
+        }catch(err){
+          console.log(err)
         }
-      });
+    }
+      })
     },
-
     handleClickTableRow (row, column, event) {
       if (event.target.className.indexOf('el-icon') > -1) {
         return;

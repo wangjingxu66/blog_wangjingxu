@@ -29,21 +29,50 @@ const blogList = {
     },
   ],
 };
-
+//声明异步方法 Promise 隐式声明
 export const get = async ({ type }) => {
-  return await new Promise((resolve, reject) => {
-    setTimeout(() => {
+    await setTimeout(null,300);
       if (blogList[type]) {
-        return resolve({
+        return Promise.resolve({
           code: 200,
           data: blogList[type],
         });
       } else {
-        return reject({
+        return Promise.reject({
           code: 0,
           msg: '未找到所查的列表'
         });
       }
-    }, 300);
-  });
+  
 };
+// Promise 显示声明
+export const post = ({ type })=>{
+  return new Promise((resolve,reject) => {
+    setTimeout(() => {
+      if (type) {
+        return resolve("ture");
+      } else {
+        return reject("false")
+    }
+  },300);
+});
+};
+// 声明异步方法结束
+
+//调用异步方法 调用方式: 异步回调形式
+const exampleA = () => {
+  post({ type: 123 })
+    .then((res => {
+      console.log(res)
+    })).catch ((err) => {
+      console.log(err)
+    })}
+//调用方式 : 异步转同步调用
+const exampleB = async () => {
+  try{
+    const res = await post({ type: 123 });
+    console.log(res)
+  }catch(err){
+    console.log(err)
+  }
+}

@@ -8,12 +8,7 @@ export default async ({ type }) => {
         type,
       },
     });
-    console.log(res)
-    if(res.code === 200){
-      return Promise.resolve(res.data);
-    }else{
-      return Promise.reject(res);
-    }
+   return Promise.resolve(res)
   } catch (err) {
     console.log(err, '12345');
     return Promise.reject(err);
