@@ -10,13 +10,12 @@ const userInfo = {
   },
 };
 
-const retryTimes = 5;
-const retryTimesOutWaitTime = 10;
+const retryTimes = 3;
 
 const userStateTemplate = {
   failedTimes: 0,
   locked: false,
-  waitTime: retryTimesOutWaitTime,
+  waitTime: 10,
   timer: null,
 }
 
@@ -24,6 +23,7 @@ const userState = {
 };
 
 export const post = async ({ username, password }) => {
+  console.log(username,password)
   await setTimeout(null, 1000);
 
   // 查询用户是否存在
@@ -56,6 +56,7 @@ export const post = async ({ username, password }) => {
         }
         _userState.waitTime--;
       }, 1000);
+
       return Promise.reject({
         code: 40002,
         msg: '请求次数过多，请' + _userState.waitTime + '秒后重试',

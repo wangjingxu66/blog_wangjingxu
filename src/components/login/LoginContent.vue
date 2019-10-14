@@ -78,7 +78,7 @@ export default {
           try {
             this.btnStatus = this.btnStatusEnum.disabled;
             const res = await postLogin({ username, password });
-            this.$router.push('/list');
+            this.$router.push('/blog/list?type=frontend_blog');
           } catch (err) {
             this.$message.error(err && err.msg);
             console.log(err);
