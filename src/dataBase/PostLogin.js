@@ -1,3 +1,5 @@
+import { waiting } from "../utils/Timer";
+
 const userInfo = {
   'wangjingxu': {
     username: 'wangjingxu',
@@ -24,7 +26,7 @@ const userState = {
 };
 
 export const post = async ({ username, password }) => {
-  await setTimeout(null, 1000);
+  await waiting(1000);
 
   // 查询用户是否存在
   if (!userInfo[username]) {

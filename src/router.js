@@ -21,7 +21,7 @@ const router = new Router({
       path: '/blog',
       name: 'Blog',
       component: Blog,
-      //redirect: '/blog/list',
+      redirect: '/blog/list',
       meta: {
         title: '列表入口',
         nav: [
