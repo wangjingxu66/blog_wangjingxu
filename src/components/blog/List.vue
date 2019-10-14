@@ -78,13 +78,12 @@ export default {
     },
 
     init () {
-      this.type = this.$route.query.type;
+      this.type = this.$route.query.type || this.$route.meta.nav[0].type;
       this.$route.meta.nav.forEach(async (item, index) => {
         if (item.type === this.type) {
         try{
           this.listName = item.name;
-          const res = await getBlogList({ type: this.type});
-          //const res = await getBlogList({ type: '301'});
+          const res = await getBlogList({ type: this.type });
           this.tableData = Object.assign([],res.data)
         }catch(err){
           console.log(err)

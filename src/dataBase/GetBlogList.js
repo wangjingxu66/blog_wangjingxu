@@ -1,3 +1,5 @@
+import { waiting } from "../utils/Timer";
+
 const blogList = {
   'frontend_blog': [
     {
@@ -33,7 +35,8 @@ const blogList = {
 // ################### 声明异步方法 start ##########################
 // promise隐式声明
 export const get = async ({ type }) => {
-  await setTimeout(null, 300);
+  await waiting(1000);
+
   if (blogList[type]) {
     return Promise.resolve({
       code: 200,
