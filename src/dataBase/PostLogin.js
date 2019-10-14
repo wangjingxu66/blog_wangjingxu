@@ -13,11 +13,12 @@ const userInfo = {
 };
 
 const retryTimes = 3;
+const retryTimesOutWaitTime = 5;
 
 const userStateTemplate = {
   failedTimes: 0,
   locked: false,
-  waitTime: 10,
+  waitTime: 0,
   timer: null,
 }
 
@@ -25,12 +26,7 @@ const userState = {
 };
 
 export const post = async ({ username, password }) => {
-<<<<<<< HEAD
-  console.log(username,password)
-  await setTimeout(null, 1000);
-=======
-  await waiting(1000);
->>>>>>> afbf5d409d8f25a625111cb31be43ad239de4999
+  await waiting(300);
 
   // 查询用户是否存在
   if (!userInfo[username]) {
@@ -54,14 +50,19 @@ export const post = async ({ username, password }) => {
       // 锁定登录
       _userState.locked = true;
       // 锁定倒计时
-      _userState.timer = setInterval(() => {
-        if (_userState.waitTime === 0) {
-          _userState.locked = false;
-          _userState.failedTimes = 0;
-          clearInterval(_userState.timer);
-        }
-        _userState.waitTime--;
-      }, 1000);
+      if(!_userState.timer ){
+        _userState.waitTime = retryTimesOutWaitTime;
+        _userState.timer = setInterval(() => {
+          if (_userState.waitTime === 0) {
+            _userState.locked = false;
+            _userState.failedTimes = 0;
+            clearInterval(_userState.timer);
+            _userState.timer = null;
+          }
+          _userState.waitTime--;
+        }, 1000);
+      }
+
 
       return Promise.reject({
         code: 40002,
