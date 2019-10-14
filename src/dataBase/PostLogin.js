@@ -13,12 +13,12 @@ const userInfo = {
 };
 
 const retryTimes = 5;
-const retryTimesOutWaitTime = 10;
+const retryTimesOutWaitTime = 5;
 
 const userStateTemplate = {
   failedTimes: 0,
   locked: false,
-  waitTime: retryTimesOutWaitTime,
+  waitTime: 0,
   timer: null,
 }
 
@@ -26,7 +26,7 @@ const userState = {
 };
 
 export const post = async ({ username, password }) => {
-  await waiting(1000);
+  await waiting(300);
 
   // 查询用户是否存在
   if (!userInfo[username]) {
@@ -50,14 +50,18 @@ export const post = async ({ username, password }) => {
       // 锁定登录
       _userState.locked = true;
       // 锁定倒计时
-      _userState.timer = setInterval(() => {
-        if (_userState.waitTime === 0) {
-          _userState.locked = false;
-          _userState.failedTimes = 0;
-          clearInterval(_userState.timer);
-        }
-        _userState.waitTime--;
-      }, 1000);
+      if (!_userState.timer) {
+        _userState.waitTime = retryTimesOutWaitTime;
+        _userState.timer = setInterval(() => {
+          if (_userState.waitTime <= 1) {
+            _userState.locked = false;
+            _userState.failedTimes = 0;
+            clearInterval(_userState.timer);
+            _userState.timer = null;
+          }
+          _userState.waitTime--;
+        }, 1000);
+      }
       return Promise.reject({
         code: 40002,
         msg: '请求次数过多，请' + _userState.waitTime + '秒后重试',
