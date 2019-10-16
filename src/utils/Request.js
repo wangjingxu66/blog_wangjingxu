@@ -1,8 +1,14 @@
+import router from "../router";
+import { pathToFileURL } from "url";
+
 export const get = async ({ url, params }) => {
   try {
     const res = await require(`@/dataBase/${url}`).get(params);
     return Promise.resolve(res);
   } catch (err) {
+    router.replace(
+      {path:'/'}
+      )
     return Promise.reject(err);
   }
 }

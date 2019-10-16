@@ -1,6 +1,7 @@
 import { waiting } from "../utils/Timer";
+import { storageGet } from "../utils/LocalStorage";
 
-const blogList = {
+export const blogList = {
   'frontend_blog': [
     {
       date: '2019-09-01',
@@ -31,13 +32,17 @@ const blogList = {
     },
   ],
 };
+const falseMsg = {
+
+}
 
 // ################### 声明异步方法 start ##########################
 // promise隐式声明
 export const get = async ({ type }) => {
-  await waiting(1000);
+  await waiting(500);
 
   if (blogList[type]) {
+    console.log(storageGet('user_info'))
     return Promise.resolve({
       code: 200,
       data: blogList[type],

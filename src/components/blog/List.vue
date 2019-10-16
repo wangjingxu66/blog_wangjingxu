@@ -78,7 +78,14 @@ export default {
     },
 
     init () {
-      this.type = this.$route.query.type || this.$route.meta.nav[0].type;
+      this.type = this.$route.query.type;
+      if (!this.type) {
+        return this.$router.replace({
+          query: {
+            type: this.$route.meta.nav[0].type,
+          },
+        });
+      }
       this.$route.meta.nav.forEach(async (item, index) => {
         if (item.type === this.type) {
         try{

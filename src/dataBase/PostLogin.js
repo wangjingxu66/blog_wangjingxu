@@ -1,6 +1,7 @@
+import { storageSet, storageGet } from '../utils/LocalStorage';
 import { waiting } from "../utils/Timer";
 
-const userInfo = {
+export const userInfo = {
   'wangjingxu': {
     username: 'wangjingxu',
     password: '123456'
@@ -26,7 +27,7 @@ const userState = {
 };
 
 export const post = async ({ username, password }) => {
-  await waiting(300);
+  await waiting(500);
 
   // 查询用户是否存在
   if (!userInfo[username]) {
@@ -50,10 +51,10 @@ export const post = async ({ username, password }) => {
       // 锁定登录
       _userState.locked = true;
       // 锁定倒计时
-      if(!_userState.timer ){
+      if (!_userState.timer) {
         _userState.waitTime = retryTimesOutWaitTime;
         _userState.timer = setInterval(() => {
-          if (_userState.waitTime === 0) {
+          if (_userState.waitTime <= 1) {
             _userState.locked = false;
             _userState.failedTimes = 0;
             clearInterval(_userState.timer);
@@ -80,6 +81,13 @@ export const post = async ({ username, password }) => {
 
   // 密码校验成功
   else {
+    const loginRecord = storageGet('login_record') || {};
+    loginRecord[username] = {
+      username,
+      time: Date.now(),
+    };
+    console.log(loginRecord[username])
+    storageSet(`login_record`, loginRecord);
     return Promise.resolve({
       code: 200,
       msg: '登录成功',
